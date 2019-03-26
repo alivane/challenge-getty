@@ -6,9 +6,11 @@
     "bootstrap": "^4.0.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-redux": "^5.0.7",
     "react-redux-form": "^1.16.8",
     "react-scripts": "2.1.8",
-    "reactstrap": "^5.0.0"
+    "reactstrap": "^5.0.0",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
