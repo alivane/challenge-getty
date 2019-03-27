@@ -11,11 +11,13 @@ class CommentForm extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            isOpenDelete: false
+            isOpenDelete: false,
+            comments: this.props.comments
         }
         this.toggleClick = this.toggleClick.bind(this);
         this.toggleClickDelete = this.toggleClickDelete.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     toggleClick(){
@@ -31,10 +33,16 @@ class CommentForm extends Component {
     }
     
     handleSubmit = (values) =>{
-        console.log('values: ' + JSON.stringify(values));
+        this.props.updateCommentData(this.state.comments.id, values.name, values.comment)
         this.toggleClick()
+        
     }
 
+    handleDelete = () =>{
+        const id = this.state.comments.id;
+        this.props.deleteComment(id);
+        this.toggleClickDelete()
+    }
     
     render(){
         return(
@@ -51,6 +59,7 @@ class CommentForm extends Component {
                                     <Control.text model=".name" id="name" name="name"
                                         placeholder="Name ..."
                                         className="form-control"
+                                        defaultValue={this.state.comments.name}
                                         validators={{
                                             required, minLength: minLength(3)
                                         }}
@@ -70,6 +79,7 @@ class CommentForm extends Component {
                                     <Control.textarea model=".comment" id="comment" name="comment"
                                         rows="6"
                                         className="form-control"
+                                        defaultValue={this.state.comments.comment}
                                         validators={{
                                             required, minLength: minLength(3)
                                         }}/>
@@ -92,7 +102,7 @@ class CommentForm extends Component {
                     <ModalHeader toggle={this.toggleClickDelete}>Delete</ModalHeader>
                     <ModalBody>
                         <p>Are you sure to remove?</p>
-                        <Button className="btn-style" color="danger">Yes</Button>
+                        <Button className="btn-style" color="danger" onClick={this.handleDelete}>Yes</Button>
                         <Button className="btn-style" onClick={this.toggleClickDelete}>No</Button>
                     </ModalBody>
                 </Modal>

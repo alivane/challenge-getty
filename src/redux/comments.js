@@ -13,7 +13,19 @@ export const Comments = (state = {
             return {...state, isLoading: false, errMess: action.payload, comments: []}
         case ActionTypes.ADD_COMMENT:
             var comments = action.comments.payload
-            return {...state, comments: state.comments.concat(comments)};
+            return {...state, comments: state.comments.concat(comments)}
+        case ActionTypes.REMOVE_COMMENT:
+            return {...state, isLoading: false, errMess: null,  comments: state.comments.filter(comment => comment.id !== action.id )};
+        case ActionTypes.UPDATE_COMMENT:
+            state.comments.filter((data, index) => {
+                if(data.id === action.payload.id) {
+                   return ( state.comments.reduce((prev, current)=> {
+                        prev.comments[index] = action.payload;
+                        return prev;
+                    }, state))
+                }
+            })
+            return {...state, isLoading: false, errMess: null}
         default:
             return state;
     }

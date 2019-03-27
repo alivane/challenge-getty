@@ -3,7 +3,7 @@ import {CardFooter, Row, Card, CardBody, CardTitle, CardText, Col} from 'reactst
 import CommentForm from './CommentForm';
 import {Loading} from './LoadingComponent';
 import {connect} from 'react-redux';
-import {postComment, fetchComments} from '../redux/ActionCreators';
+import {postComment, fetchComments, deleteComment, updateCommentData} from '../redux/ActionCreators';
 
 const mapStateToProp = state =>{
     return {
@@ -13,10 +13,12 @@ const mapStateToProp = state =>{
 
 const mapDispatchToProps = dispatch => ({
     postComment: (name, comment) => dispatch(postComment(name, comment)),
-    fetchComments: () => dispatch(fetchComments())
+    fetchComments: () => dispatch(fetchComments()),
+    deleteComment: (id) => dispatch(deleteComment(id)),
+    updateCommentData: (id, name, comment) => dispatch(updateCommentData(id, name, comment))
 });
   
-function RenderComments({commentsData}) {
+function RenderComments({commentsData, deleteComment, updateCommentData}) {
     if (commentsData != null){
         const allComments = commentsData.map( (objCom) =>{
             return(
@@ -29,7 +31,7 @@ function RenderComments({commentsData}) {
                     <CardFooter>
                         <Row>
                             <Col md={{size:4}}>
-                                <CommentForm></CommentForm>
+                                <CommentForm deleteComment={deleteComment} updateCommentData={updateCommentData} comments={objCom}></CommentForm>
                             </Col>
                         </Row>
                     </CardFooter>
@@ -82,7 +84,7 @@ class Comments extends Component{
                 <div className="container">
                     <div className="row">
                         <Col md={{size:12}}>
-                            <RenderComments commentsData={this.props.comments.comments}/>
+                            <RenderComments commentsData={this.props.comments.comments} updateCommentData={this.props.updateCommentData} deleteComment={this.props.deleteComment}/>
                         </Col>
                     </div>
                 </div>
