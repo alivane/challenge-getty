@@ -3,14 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import Comments from './components/Comments';
 
-const commentData = [{"id":"1", "name":"test name", "comments": "test comment"}, 
-                      {"id":"2", "name":"test name 2", "comments": "test comment 2"}]
+import {Provider} from 'react-redux';
+import {ConfigureStore} from './redux/configureStore';
+
+const store = ConfigureStore();
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Comments commentsData={commentData}></Comments>
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <img className="image-bg" src="/images/whatis.jpg"></img>
+          <Comments></Comments>
+        </div>
+      </Provider>
     );
   }
 }
