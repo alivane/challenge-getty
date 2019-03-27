@@ -10,9 +10,11 @@ class CommentForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isOpenDelete: false
         }
         this.toggleClick = this.toggleClick.bind(this);
+        this.toggleClickDelete = this.toggleClickDelete.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -21,16 +23,24 @@ class CommentForm extends Component {
             isOpen: !this.state.isOpen
         })
     }
+
+    toggleClickDelete(){
+        this.setState({
+            isOpenDelete: !this.state.isOpenDelete
+        })
+    }
     
     handleSubmit = (values) =>{
         console.log('values: ' + JSON.stringify(values));
         this.toggleClick()
     }
 
+    
     render(){
         return(
             <div>
-                <Button onClick={this.toggleClick}>Comment Here</Button>
+                <Button className="btn-style" color="success" onClick={this.toggleClick}>Edit Comment</Button>
+                <Button className="btn-style" color="danger" onClick={this.toggleClickDelete}>Delete</Button>   
                 <Modal isOpen={this.state.isOpen} toggle={this.toggleClick}>
                     <ModalHeader toggle={this.toggleClick}>Comment</ModalHeader>
                     <ModalBody>
@@ -76,6 +86,14 @@ class CommentForm extends Component {
                                 <Button type="submit" value="submit" className="bg-primary">Submit</Button>
                             </Container>
                         </LocalForm>
+                    </ModalBody>
+                </Modal>
+                <Modal isOpen={this.state.isOpenDelete} toggle={this.toggleClickDelete}>
+                    <ModalHeader toggle={this.toggleClickDelete}>Delete</ModalHeader>
+                    <ModalBody>
+                        <p>Are you sure to remove?</p>
+                        <Button className="btn-style" color="danger">Yes</Button>
+                        <Button className="btn-style" onClick={this.toggleClickDelete}>No</Button>
                     </ModalBody>
                 </Modal>
             </div>
