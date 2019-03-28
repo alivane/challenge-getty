@@ -26,12 +26,12 @@ class CommentAdd extends Component {
     }
     render(){
         return(
-            <div className="container">
+            <div className="container center-form">
                 <div className="row row-content">
                     <div className="col-12">
                         <h3>Add comments</h3>
                     </div>
-                    <div className="col-12 col-md-9">
+                    <div className="col-12">
                         <LocalForm onSubmit={(values) => (this.handleAdd(values))}>
                             <Container>
                                 <Row className="form-group">
