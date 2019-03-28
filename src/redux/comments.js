@@ -12,7 +12,7 @@ export const Comments = (state = {
         case ActionTypes.COMMENTS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, comments: []}
         case ActionTypes.ADD_COMMENT:
-            var comments = action.comments.payload
+            var comments = action.payload
             return {...state, comments: state.comments.concat(comments)}
         case ActionTypes.REMOVE_COMMENT:
             return {...state, isLoading: false, errMess: null,  comments: state.comments.filter(comment => comment.id !== action.id )};

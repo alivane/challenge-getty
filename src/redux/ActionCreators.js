@@ -41,12 +41,11 @@ export const addComment = (comment) => ({
     payload: comment
 });
 
-export const postComment = (name, comment) => (dispatch) => {
+export const postComment = ({name, comment}) => (dispatch) => {
     const newComment = {
         name: name,
         comment: comment
     };
-
     return fetch(urlComments + 'comments', {
         method: "POST",
         body: JSON.stringify(newComment),

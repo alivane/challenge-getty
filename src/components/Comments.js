@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {CardFooter, Row, Card, CardBody, CardTitle, CardText, Col} from 'reactstrap';
 import CommentForm from './CommentForm';
 import {Loading} from './LoadingComponent';
+import CommentAdd from './CommentAdd';
 import {connect} from 'react-redux';
 import {postComment, fetchComments, deleteComment, updateCommentData} from '../redux/ActionCreators';
 
@@ -84,6 +85,7 @@ class Comments extends Component{
                 <div className="container">
                     <div className="row">
                         <Col md={{size:12}}>
+                            <CommentAdd postComment={this.props.postComment}></CommentAdd>
                             <RenderComments commentsData={this.props.comments.comments} updateCommentData={this.props.updateCommentData} deleteComment={this.props.deleteComment}/>
                         </Col>
                     </div>
